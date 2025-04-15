@@ -28,10 +28,13 @@ app.use((_, res, next) => {
 
 app.use('/api', api);
 
-(async () => {
-  const swaggerSpec = await SwaggerApi();
-  app.use('/docs/api', SwaggerUi.serve, SwaggerUi.setup(swaggerSpec));
-})();
+SwaggerApi()
+  .then((swaggerSpec) => {
+    app.use('/docs/api', SwaggerUi.serve, SwaggerUi.setup(swaggerSpec));
+  })
+  .catch((error) => {
+    console.error('Failed to load Swagger API:', error);
+  });
 
 const server = http.createServer(app);
 

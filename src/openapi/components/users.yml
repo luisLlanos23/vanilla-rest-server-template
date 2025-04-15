@@ -1,0 +1,49 @@
+components:
+  schemas:
+    userInfo:
+      type: object
+      properties:
+        id:
+          type: string
+          description: user id
+        name:
+          type: string
+          description: user name
+        lastName:
+          type: string
+          description: user name
+        email:
+          type: string
+          description: user email
+        isAdmin:
+          type: boolean
+          description: user is admin
+
+    getAllUsersResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/userInfo'
+
+    getUserResponse:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/userInfo'
+        - type: object
+          properties:
+            tokenExpiration:
+              type: string
+              format: date-time
+              description: user creation time
+
+    updateUserRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: user name
+        lastName:
+          type: string
+          description: user name
+        isAdmin:
+          type: boolean
+          description: user is admin

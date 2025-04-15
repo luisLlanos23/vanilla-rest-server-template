@@ -15,7 +15,7 @@ resource "kubernetes_deployment_v1" "vanilla_server_template_deployment" {
     revision_history_limit = 5
     selector {
       match_labels = {
-        app = "vSERVER_PORT"
+        app = "vanilla-rest-server"
       }
     }
     template {

@@ -41,7 +41,7 @@ module.exports = (ConnectionInterface, DataTypes) => {
       defaultValue: DataTypes.NOW,
       allowNull: false
     },
-    update_at: {
+    updated_at: {
       type: DataTypes.DATE,
       defaultValue: DataTypes.NOW,
       allowNull: false

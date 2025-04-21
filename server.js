@@ -27,7 +27,14 @@ app.use((_, res, next) => {
 });
 
 app.use('/health', returnHealthStatus);
-SwaggerApi().then((swaggerSpec) => { app.use('/docs/api', SwaggerUi.serve, SwaggerUi.setup(swaggerSpec))});
+SwaggerApi()
+  .then((swaggerSpec) => {
+    app.use('/docs/api', SwaggerUi.serve, SwaggerUi.setup(swaggerSpec));
+    app.get('/docs/api/swagger.json', (_, res) => {
+      res.setHeader('Content-Type', 'application/json');
+      res.send(swaggerSpec);
+    });
+  });
 app.use('/api', api);
 
 const server = http.createServer(app);

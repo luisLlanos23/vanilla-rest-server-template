@@ -26,20 +26,18 @@ app.use((_, res, next) => {
   return next();
 });
 
+app.use('/health', returnHealthStatus);
+SwaggerApi().then((swaggerSpec) => { app.use('/docs/api', SwaggerUi.serve, SwaggerUi.setup(swaggerSpec))});
 app.use('/api', api);
-
-SwaggerApi()
-  .then((swaggerSpec) => {
-    app.use('/docs/api', SwaggerUi.serve, SwaggerUi.setup(swaggerSpec));
-  })
-  .catch((error) => {
-    console.error('Failed to load Swagger API:', error);
-  });
 
 const server = http.createServer(app);
 
 server.listen(config.SERVER_PORT, '0.0.0.0', () => {
   console.log(`Express Server Running on Port ${config.SERVER_PORT}`);
 });
+
+function returnHealthStatus(_req, res) {
+  res.status(200).send('OK').end()
+}
 
 module.exports = server;

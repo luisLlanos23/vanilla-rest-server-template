@@ -1,11 +1,12 @@
 const Path = require('path');
 const SwaggerJsdoc = require('swagger-jsdoc');
+const packageJson = require('../../package.json');
 
 const swaggerDefinition = {
   openapi: '3.0.0',
   info: {
-    title: 'Template API Server Documentation',
-    version: '1.0.0',
+    title: packageJson.name,
+    version: packageJson.version,
     description: 'Template API Server is a basic server template built with vanilla JavaScript, without using frameworks like Express. It uses only the Node.js http module to handle routes and requests. Ideal for learning or creating simple APIs from scratch.'
   },
   security: [{ JWT: [] }],
